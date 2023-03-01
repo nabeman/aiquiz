@@ -6,7 +6,8 @@ const app = createApp({
     data(){
         return{
             word_list: ["tomato", "internet", "urban", "design", "game", "glass", "money", "book"],
-            select_list: []
+            select_list: [],
+            imgsrc: ""
         }
     },
     methods: {
@@ -24,7 +25,6 @@ const app = createApp({
             let words = `${this.select_list[0]} ${this.select_list[1]} ${this.select_list[2]}`
             let post = axios.post("http://localhost:3000/", { word: words }).then((response) => {
                 console.log("postで送信");
-                console.log(response.data);
                 this.catchimg(response.data);
             }).catch((err) =>{
                 console.log("エラー");           
@@ -33,8 +33,7 @@ const app = createApp({
         },
         catchimg(img){
             //imgはbase64形式
-            document.getElementById("img").src = img;
-            console.log(test);
+            document.getElementById("img").src = "data:image/png;base64," + img;
         },
     }
 })

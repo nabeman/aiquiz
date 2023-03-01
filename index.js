@@ -18,9 +18,10 @@ async function RequestImage(words){
     let response = await openai.createImage({
         prompt: words,
         n: 1,
-        size: "1024x1024"
+        size: "1024x1024",
+        response_format: "b64_json"
     })
-    let image_url = response.data.data[0].url;
+    let image_url = response.data.data[0].b64_json;
     return image_url
 }
 
@@ -38,11 +39,7 @@ app.post('/', async (req, res) => {
     words = req.body['word'];
     let url = await RequestImage(words); 
     console.log("url取得完了");
-    let base;
-    axios.get(url).then((response) => {
-        base = response.data;
-    })
-    res.send(base);
+    res.send(url);
 })
 
 try{
