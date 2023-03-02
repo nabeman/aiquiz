@@ -1,9 +1,9 @@
-// import  express, { urlencoded } from 'express';
+require('dotenv').config();
 const express = require('express');
 const urlencoded = require('express')
 const { default: axios } = require('axios');
 
-const APIKEY = "";
+const APIKEY = process.env.APIKEY;
 const app = express();
 const PORT = 3000;
 
@@ -45,6 +45,7 @@ app.post('/', async (req, res) => {
 try{
     app.listen(PORT, () => {
         console.log(`dev surver running at: http://localhost:${PORT}/`)
+        console.log(APIKEY);
     })
 }catch{
     if(e instanceof Error){
