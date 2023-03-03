@@ -5,7 +5,7 @@ const { default: axios } = require('axios');
 
 const APIKEY = process.env.APIKEY;
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const { Configuration, OpenAIApi} = require('openai');
 const configuration = new Configuration({
